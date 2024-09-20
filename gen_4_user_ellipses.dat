@@ -25,15 +25,15 @@ outputAllRadii: 0
 */
                       
 
-domainSize: {100,100,100} 
+domainSize: {1000,1000,1000} 
     /* Mandatory Parameter.
         Creates a domain with dimension x*y*z centered at the origin.*/
 
 numOfLayers: 0    //number of layers
 
 layers: 
-{-50,0}
-{0,50}
+{-500,0}
+{0,500}
 
 
 /*  Layers need to be listed line by line
@@ -47,11 +47,11 @@ layers:
 numOfRegions: 1
 
 regions:
-{-50, 50, -50, 50, -50, 50}
+{-500, 500, -500, 500, -500, 500}
 
 orientationOption: 0
 
-h: 0.2
+h: 1
   /* Minimum fracture length scale(meters)
     Any fracture with a feature, such as and intersection, of less than h will be rejected. */
 
@@ -68,11 +68,11 @@ removeFracturesLessThan: 0
 //==========================================================================//
 /* Fracture Network Parameters:                                             */
 
-tripleIntersections: 1
+tripleIntersections: 0
 /* Options:     0: Off
                 1: On    */
 
-/* multipleClusters: 1 */
+/* multipleClusters: 0 */
 
 
 printRejectReasons: 1
@@ -89,11 +89,11 @@ visualizationMode: 0
    1: produce only first round of triangulations. In this case no 
    modeling of flow and transport is possible. */ 
 
-seed: 0
+seed: 200
     //Seed for random generator. 
         
 
-domainSizeIncrease: {48,48,48} 
+domainSizeIncrease: {100,100,100} 
           //temporary size increase for inserting fracture centers outside domain
           //increases the entire width by this ammount. So, {1,1,1} will increase
           //the domain by adding .5 to the +x, and subbtracting .5 to the -x, etc
@@ -130,7 +130,7 @@ boundaryFaces: {1,1,0,0,0,0}
 */
                           
 
-rejectsPerFracture: 50  /*If fracture is rejected, it will be re-translated to a new
+rejectsPerFracture: 10  /*If fracture is rejected, it will be re-translated to a new
                          position this number of times. 
                          
                          This helps hit distribution targets for stochastic families 
@@ -146,7 +146,7 @@ rejectsPerFracture: 50  /*If fracture is rejected, it will be re-translated to a
 
 //user rectangles and user Ellipses defined in their cooresponding files
 
-famProb: {1} 
+famProb: {0.219,0.250,0.531} 
 /* Probability of occurrence of each family of randomly distrubuted rectangles
    and ellipses.
    User-ellipses and user-rectangles insertion will be attempted with 100% 
@@ -173,36 +173,36 @@ famProb: {1}
 /*===========================================================================*/
 
 //Number of ellipse families
-nFamEll: 1
+nFamEll: 3
     //Having this option = 0 will ignore all rectangle family variables
 
-eLayer: {0}
+eLayer: {0,0,0}
     /* Defines which domain the family belings to.
      Layer 0 is the entire domain.
      Layers numbered > 0 coorespond to layers defined above
      1 corresponts to the first layer listed, 2 is the next layer listed, etc */
      
-eRegion: {0}
+eRegion: {0,0,0}
 
 //edist is a mandatory parameter if using statistically generated ellipses 
-edistr: {3}   /* Ellipse statistical distribution options:
+edistr: {2,2,2}   /* Ellipse statistical distribution options:
                       1 - lognormal distribution
                       2 - truncated power law distribution   
                       3 - exponential distribution
                       4 - constant */
                                                                                        
                       
-ebetaDistribution: {1}   /* Beta is the rotation around the polygon's normal
+ebetaDistribution: {1,1,1}   /* Beta is the rotation around the polygon's normal
                     vector, with the polygon centered on x-y plane at the orgin 
                     
                     0 - uniform distribution [0, 2PI]    
                     1 - constant angle (specefied below by "ebeta")    */                
     
     
-e_p32Targets: {0.5} 
+e_p32Targets: {0.0099,0.0113,0.0240} 
 /* Elliptical families target fracture intensity per family.
 When using stopCondition = 1 (defined at the top of the input file), families will 
-be inserted until the families desired fracture intensity has been reached. 
+be inserted untill the families desired fracture intensity has been reached. 
 Once all families desired fracture intensity has been met, fracture generation will 
 be complete.
 */                      
@@ -211,10 +211,10 @@ be complete.
 // Parameters used by all stochastic ellipse families 
 // Mandatory Parameters if using statistically generated ellipses  
 
-easpect: {1}  /* Aspect ratio. Used for lognormal and truncated 
+easpect: {1,1,1}  /* Aspect ratio. Used for lognormal and truncated 
                     power law distribution. */
 
-enumPoints: {15} /*Number of vertices used in creating each elliptical 
+enumPoints: {12, 12,12} /*Number of vertices used in creating each elliptical 
                            fracture family. Number of elements must match number 
                            of ellipse families (first number in nShape) */
 
@@ -222,17 +222,17 @@ eAngleOption: 0     /* All angles for ellipses:
                        0 - radians (Must use numerical value for PI)
                        1 - degrees  */
                         
-etheta: {4.50} /*Ellipse fracture orientation.
+etheta: {1.65,1.57,2.95} /*Ellipse fracture orientation.
                      The angle the normal vector makes with the z-axis */
 
-ephi: {2.0}   /* Ellipse fracture orientation.
+ephi: {4.78,3.14,2.62}   /* Ellipse fracture orientation.
                     The angle the projection of the normal onto the x-y plane
                     makes with the x-axis */
 
-ebeta: {0}   /* rotation around the normal vector */
+ebeta: {0, 0, 0}   /* rotation around the normal vector */
 
 
-ekappa: {5}  /*Parameter for the fisher distribnShaprutions. The bigger, the more 
+ekappa: {9.41,8.3,5.7}  /*Parameter for the fisher distribnShaprutions. The bigger, the more 
                         similar (less diverging) are the elliptical familiy's
                         normal vectors */                
 
@@ -255,14 +255,14 @@ esd: {.5} // Standard deviation for lognormal distributions of ellipses
 //     Mandatory Parameters if using ellispes with exponential distribution 
 
 
-eExpMean: {10}  //Mean value for Exponential  Distribution     
-eExpMax: {200}  //Mean value for Exponential  Distribution     
-eExpMin: {2}  //Mean value for Exponential  Distribution     
+eExpMean: {2}  //Mean value for Exponential  Distribution     
+eExpMax: {3}  //Mean value for Exponential  Distribution     
+eExpMin: {1}  //Mean value for Exponential  Distribution     
 
 //===========================================================================
 //    Options Specific For Constant Size of ellipses (edistr=4):
 
-econst: {10}  // Constant radius, defined per family     
+econst: {10, 10, 10}  // Constant radius, defined per family     
                
 //===========================================================================
 // Options Specific For Ellipse Truncated Power-Law Distribution (edistr=2)
@@ -271,13 +271,13 @@ econst: {10}  // Constant radius, defined per family
 // NOTE: Number of elements must match number 
 //       of ellipse families (first number in nShape)
 
-emin: {10} // Minimum radius for each ellipse family. 
+emin: {30,30,30} // Minimum radius for each ellipse family. 
              // For power law distributions. 
 
-emax: {80}  // Maximum radius for each ellipse family.
+emax: {564,564,564}  // Maximum radius for each ellipse family.
                   // For power law distributions. 
                     
-ealpha: {2.2} // Alpha. Used in truncated power-law 
+ealpha: {2.4,2.4,2.4} // Alpha. Used in truncated power-law 
                         // distribution calculation
 
 
@@ -297,7 +297,7 @@ nFamRect: 0
     //Having this option = 0 will ignore all rectangle family variables
 
 
-rLayer: {0}
+rLayer: {0,0}
     /* Defines which domain the family belings to.
      Layer 0 is the entire domain.
      Layers numbered > 0 coorespond to layers defined above
@@ -305,7 +305,7 @@ rLayer: {0}
 
 
 /*rdist is a mandatory parameter if using statistically generated rectangles */
-rdistr: {2}   /*  Rectangle statistical distribution options:
+rdistr: {2,3}   /*  Rectangle statistical distribution options:
                         1 - lognormal distribution
                         2 - truncated power law distribution 
                         3 - exponential distribution
@@ -404,10 +404,10 @@ rconst: {4,4}  // Constant radius, defined per rectangular family
          user-ellipse, with possibility of being rejected  */
 
    
-userEllipsesOnOff: 0    //0 - User Ellipses off
+userEllipsesOnOff: 1    //0 - User Ellipses off
                         //1 - User Ellipses on
 
-UserEll_Input_File_Path: /home/nicho/projects/dfnWorks/examples/4fracplus/define_4_user_ellipses.dat 
+UserEll_Input_File_Path: /dfnWorks/examples/4fracplus/define_4_user_ellipses.dat 
 
 /*===========================================================================*/
 /*===========================================================================*/
@@ -474,7 +474,7 @@ Also, coordinates must be co-planar */
 
 //NOTE: Only one aperture type may be used at a time 
 
-aperture: 4  //choise of aperture option described above
+aperture: 3  //choise of aperture option described above
 
 //(**** 1)meanAperture and stdAperture for using LogNormal distribution.********)
 meanAperture:  -3 /*Mean value for aperture using  
@@ -498,7 +498,7 @@ constantAperture: 1e-3  //Sets constant aperture for all fractures
 /*(******** 4)lengthCorrelatedAperture, aperture is defined as a function of 
        fracture size *******************/
        
-lengthCorrelatedAperture: {2.5e-5, 0.5}
+lengthCorrelatedAperture: {5e-5, 0.5}
     /*Length Correlated Aperture Option:
       Aperture is calculated by: b=F*R^k,
       where F is a first element in lengthCorrelatedAperture, 
