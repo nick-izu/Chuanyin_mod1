@@ -25,15 +25,15 @@ outputAllRadii: 0
 */
                       
 
-domainSize: {1000,1000,1000} 
+domainSize: {10,10,10} 
     /* Mandatory Parameter.
         Creates a domain with dimension x*y*z centered at the origin.*/
 
 numOfLayers: 0    //number of layers
 
 layers: 
-{-500,0}
-{0,500}
+{-5,0}
+{0,5}
 
 
 /*  Layers need to be listed line by line
@@ -47,7 +47,7 @@ layers:
 numOfRegions: 1
 
 regions:
-{-500, 500, -500, 500, -500, 500}
+{-5, 5, -5, 5, -5, 5}
 
 orientationOption: 0
 
@@ -93,7 +93,7 @@ seed: 200
     //Seed for random generator. 
         
 
-domainSizeIncrease: {100,100,100} 
+domainSizeIncrease: {1,1,1} 
           //temporary size increase for inserting fracture centers outside domain
           //increases the entire width by this ammount. So, {1,1,1} will increase
           //the domain by adding .5 to the +x, and subbtracting .5 to the -x, etc
@@ -137,7 +137,10 @@ rejectsPerFracture: 10  /*If fracture is rejected, it will be re-translated to a
                          (Set to 1 to ignore this feature)    */
 
 
-
+ keepIsolatedFractures: 0 
+/*  0 - Remove any isolated fracture (not clusters)
+    1 - Keep all fractures in the domain
+*/
 
 
 //===========================================================================
@@ -146,7 +149,7 @@ rejectsPerFracture: 10  /*If fracture is rejected, it will be re-translated to a
 
 //user rectangles and user Ellipses defined in their cooresponding files
 
-famProb: {0.219,0.250,0.531} 
+famProb: {0.33,0.33,0.33} 
 /* Probability of occurrence of each family of randomly distrubuted rectangles
    and ellipses.
    User-ellipses and user-rectangles insertion will be attempted with 100% 
@@ -199,7 +202,7 @@ ebetaDistribution: {1,1,1}   /* Beta is the rotation around the polygon's normal
                     1 - constant angle (specefied below by "ebeta")    */                
     
     
-e_p32Targets: {0.0099,0.0113,0.0240} 
+e_p32Targets: {4,4,4} 
 /* Elliptical families target fracture intensity per family.
 When using stopCondition = 1 (defined at the top of the input file), families will 
 be inserted untill the families desired fracture intensity has been reached. 
@@ -214,25 +217,25 @@ be complete.
 easpect: {1,1,1}  /* Aspect ratio. Used for lognormal and truncated 
                     power law distribution. */
 
-enumPoints: {12, 12,12} /*Number of vertices used in creating each elliptical 
+enumPoints: {10, 10,10} /*Number of vertices used in creating each elliptical 
                            fracture family. Number of elements must match number 
                            of ellipse families (first number in nShape) */
 
-eAngleOption: 0     /* All angles for ellipses: 
+eAngleOption: 1     /* All angles for ellipses: 
                        0 - radians (Must use numerical value for PI)
                        1 - degrees  */
                         
-etheta: {1.65,1.57,2.95} /*Ellipse fracture orientation.
+etheta: {0,0,80} /*Ellipse fracture orientation.
                      The angle the normal vector makes with the z-axis */
 
-ephi: {4.78,3.14,2.62}   /* Ellipse fracture orientation.
+ephi: {0,270,300}   /* Ellipse fracture orientation.
                     The angle the projection of the normal onto the x-y plane
                     makes with the x-axis */
 
 ebeta: {0, 0, 0}   /* rotation around the normal vector */
 
 
-ekappa: {9.41,8.3,5.7}  /*Parameter for the fisher distribnShaprutions. The bigger, the more 
+ekappa: {20,20,20}  /*Parameter for the fisher distribnShaprutions. The bigger, the more 
                         similar (less diverging) are the elliptical familiy's
                         normal vectors */                
 
@@ -271,13 +274,13 @@ econst: {10, 10, 10}  // Constant radius, defined per family
 // NOTE: Number of elements must match number 
 //       of ellipse families (first number in nShape)
 
-emin: {30,30,30} // Minimum radius for each ellipse family. 
+emin: {0.5,0.5,0.5} // Minimum radius for each ellipse family. 
              // For power law distributions. 
 
-emax: {564,564,564}  // Maximum radius for each ellipse family.
+emax: {1000,1000,1000}  // Maximum radius for each ellipse family.
                   // For power law distributions. 
                     
-ealpha: {2.4,2.4,2.4} // Alpha. Used in truncated power-law 
+ealpha: {2.0,2.0,2.0} // Alpha. Used in truncated power-law 
                         // distribution calculation
 
 
@@ -519,10 +522,7 @@ constantPermeability: 1e-12  //Constant permeability for all fractures
 //=============================================================================
 
 
- keepIsolatedFractures: 0 
-/*  0 - Remove any isolated fracture (not clusters)
-    1 - Keep all fractures in the domain
-*/
+
 
 
 /*===========================================================================*/
